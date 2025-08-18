@@ -1,6 +1,18 @@
 import cv2
 import numpy as np
 import torch
+import cv2
+import numpy as np
+import onnxruntime as ort
+import torch
+from tqdm import tqdm
+import torch
+import numpy as np
+from functools import lru_cache
+import cv2
+import time
+import torch.nn.functional as F
+
 
 class LetterBox:
     """
@@ -198,15 +210,7 @@ def preprocess(im):
         if not_tensor:
             im /= 255  # 0 - 255 to 0.0 - 1.0
         return im    
-import torch
-import numpy as np
-from functools import lru_cache
-import cv2
-import time
-import torch.nn.functional as F
 
-
-# names = {0: 'panela', 1: 'remendo'}
 
 
 def postprocess(preds, img, orig_imgs, conf=0.25, iou=0.7, agnostic_nms=False, max_det=300, nc=2,classes=None, names=None):
@@ -1770,14 +1774,7 @@ class Results(SimpleClass):
         return log_string
 
 
-import cv2
-import numpy as np
-import onnxruntime as ort
-import torch
 
-from preprocess import preprocess
-from postprocess import postprocess
-from tqdm import tqdm
 
 class Model:
     def __init__(self, model_path='panela.onnx', use_cuda=True):
