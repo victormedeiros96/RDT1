@@ -7,8 +7,8 @@ json_path = 'panela_20m_teste_0.5.json'
 with open(json_path) as f:
     data = json.load(f)
     
-from inference_mask import model, predict_yolo, apply_clahe
-from inference_mask import mask_from_polygon, draw_mask
+from inference_panela_part1 import model, predict_yolo, apply_clahe
+from inference_panela_part1 import mask_from_polygon, draw_mask
 from copy import deepcopy
 
 
