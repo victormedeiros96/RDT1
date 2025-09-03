@@ -1,1 +1,0 @@
-# Processar_imagens2
