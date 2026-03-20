@@ -1,5 +1,6 @@
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QFileDialog, QHBoxLayout, QCheckBox
+from GUI.custom_widgets import BannerWidget
 
 class MainWidget(QWidget):
     start_requested = pyqtSignal(str, str)
@@ -36,6 +37,9 @@ class MainWidget(QWidget):
         self.start_button.clicked.connect(self.on_start)
         layout.addWidget(self.start_button)
 
+        layout.addStretch()
+        layout.addWidget(BannerWidget())
+        
     def select_input_folder(self):
         folder = QFileDialog.getExistingDirectory(self, "Selecionar Pasta de Entrada")
         if folder:

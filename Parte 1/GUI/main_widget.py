@@ -1,17 +1,13 @@
-# GUI/main_widget.py
-
 from PyQt6 import QtWidgets as QtW
 from PyQt6.QtCore import pyqtSignal
-
+from GUI.custom_widgets import BannerWidget
 class MainWidget(QtW.QWidget):
-    """Interface do usuário, agora sem a barra de progresso."""
     start_requested = pyqtSignal(str, str)
 
     def __init__(self):
         super().__init__()
         self.setLayout(QtW.QVBoxLayout())
         
-        # --- Widgets de Input ---
         self.input_label = QtW.QLabel("Pasta de Origem:")
         self.select_input_button = QtW.QPushButton("Selecionar Pasta de Origem")
         self.input_path_edit = QtW.QLineEdit()
@@ -21,7 +17,6 @@ class MainWidget(QtW.QWidget):
         self.layout().addWidget(self.select_input_button)
         self.layout().addWidget(self.input_path_edit)
         
-        # --- Widgets de Output ---
         self.output_label = QtW.QLabel("Pasta de Saída:")
         self.select_output_button = QtW.QPushButton("Selecionar Pasta de Saída")
         self.output_path_edit = QtW.QLineEdit()
@@ -31,7 +26,6 @@ class MainWidget(QtW.QWidget):
         self.layout().addWidget(self.select_output_button)
         self.layout().addWidget(self.output_path_edit)
         
-        # --- Separador e Ação ---
         separator = QtW.QFrame()
         separator.setFrameShape(QtW.QFrame.Shape.HLine)
         separator.setFrameShadow(QtW.QFrame.Shadow.Sunken)
@@ -41,12 +35,15 @@ class MainWidget(QtW.QWidget):
         self.start_button.setStyleSheet("font-size: 14px; padding: 8px;")
         self.layout().addWidget(self.start_button)
         
-        # --- Conexões internas ---
         self.select_input_button.clicked.connect(self._open_input_directory_dialog)
         self.select_output_button.clicked.connect(self._open_output_directory_dialog)
         self.start_button.clicked.connect(self._on_start_button_clicked)
         
         self.layout().addStretch()
+        
+        self.layout().addStretch()
+        self.layout().addWidget(BannerWidget())
+        
 
     def _open_input_directory_dialog(self):
         directory = QtW.QFileDialog.getExistingDirectory(self, "Selecione a pasta de origem")
@@ -59,7 +56,6 @@ class MainWidget(QtW.QWidget):
             self.output_path_edit.setText(directory)
 
     def _on_start_button_clicked(self):
-        """Valida os campos e emite o sinal para o orquestrador."""
         input_folder = self.input_path_edit.text()
         output_folder = self.output_path_edit.text()
         
@@ -70,7 +66,6 @@ class MainWidget(QtW.QWidget):
         self.start_requested.emit(input_folder, output_folder)
 
     def toggle_controls(self, is_enabled: bool):
-        """Habilita ou desabilita os controles de interação."""
         self.start_button.setEnabled(is_enabled)
         self.select_input_button.setEnabled(is_enabled)
         self.select_output_button.setEnabled(is_enabled)

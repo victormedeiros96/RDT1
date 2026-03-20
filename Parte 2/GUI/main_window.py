@@ -7,7 +7,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Analisador de Imagens")
-        self.resize(500, 250)
+        self.resize(1000, 500)
         self._thread = None
         self._worker = None
         self.main_widget = MainWidget()

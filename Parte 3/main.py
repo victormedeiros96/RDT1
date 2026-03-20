@@ -14,7 +14,7 @@ print("Excel salvo com título centralizado.")
 
 
 # Exemplo de leitura e transformação do josiel.json em DataFrame
-interface_json = DataSourceInterface(json_path="josiel.json")
+interface_json = DataSourceInterface(json_path="deteccoes.json")
 
 # Ler o arquivo JSON
 data = interface_json.read_json()
@@ -67,4 +67,4 @@ print(df['classe'].value_counts())
 
 # Salvar o DataFrame em Excel se desejar
 interface.write_excel_with_title("planilha.xlsx", titulo,0,2,df )#df['KM'].min(),df['KM'].max()
-df.to_excel("josiel_deteccoes.xlsx", index=False)
+df.to_excel("retigrafico.xlsx", index=False)
